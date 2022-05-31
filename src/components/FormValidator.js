@@ -43,23 +43,23 @@ export default class FormValidator {
   };
 
 // проверка валидности массива полей
-  _hasInvalidInput(inputList) {
-    return inputList.some(input => !input.validity.valid)
+  _hasInvalidInput() {
+    return this._inputList.some(input => !input.validity.valid)
   };
 
 // функция изменения состояни активности кнопки сохранения формы
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._validParams.inactiveButtonClass);
-      buttonElement.setAttribute('disabled', true);
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._submitButton.classList.add(this._validParams.inactiveButtonClass);
+      this._submitButton.setAttribute('disabled', true);
     } else {
-      buttonElement.classList.remove(this._validParams.inactiveButtonClass);
-      buttonElement.removeAttribute('disabled');
+      this._submitButton.classList.remove(this._validParams.inactiveButtonClass);
+      this._submitButton.removeAttribute('disabled');
     }
   };
 
   // функция валидации открываемого попапа
-  validateOpenPopup() {
+  resetPopupValidationState() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     })

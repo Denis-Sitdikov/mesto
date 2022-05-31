@@ -40,8 +40,8 @@ export const currentParams = {
   export const formAddCard = document.querySelector('#addCardForm').querySelector('.popup__form');
   
   // кнопки
-  export const editButton = document.querySelector('.profile__button-edit');
-  export const addButton = document.querySelector('.profile__button-add');
+  export const buttonEdit = document.querySelector('.profile__button-edit');
+  export const buttonAdd = document.querySelector('.profile__button-add');
   
   
   // поля формы редактирования профиля

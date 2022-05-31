@@ -5,9 +5,9 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 
 import {
-  addButton,
+  buttonAdd,
   currentParams,
-  editButton,
+  buttonEdit,
   fieldDescription,
   fieldName,
   initialCards,
@@ -24,7 +24,7 @@ import {
 
 import createCard from "../utils/utils.js";
 
-import './index.css';
+// import './index.css';
 
 // создание экземпляра класса информации о пользователе
 const userInfo = new UserInfo(userInfoSelectors);
@@ -33,14 +33,14 @@ const userInfo = new UserInfo(userInfoSelectors);
 const cardListSection = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = createCard(item, popupPhotoView)
-    const cardElement = card.generateCard();
+    const cardElement = createCard(item, popupPhotoView)
     cardListSection.addItem(cardElement)
   }
 }, elementsContainerClass);
 
 // создание объектов валидатора
 const formEditProfileValidator = new FormValidator(formEditProfile, currentParams);
+//formSelector
 formEditProfileValidator.enableValidation()
 
 const formAddCardValidator = new FormValidator(formAddCard, currentParams);
@@ -49,6 +49,7 @@ formAddCardValidator.enableValidation()
 // создание попапа редактирования профиля
 const popupEditProfile = new PopupWithForm({
   validator: formEditProfileValidator,
+  currentParams,
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData.name, formData.description)
   }
@@ -57,9 +58,13 @@ const popupEditProfile = new PopupWithForm({
 // создание попапа добавления нового элемента
 const popupAddCard = new PopupWithForm({
   validator: formAddCardValidator,
+  currentParams,
   handleFormSubmit: (formData) => {
-    const card = createCard(formData, popupPhotoView)
-    const cardElement = card.generateCard();
+    const cardElement = createCard(formData, popupPhotoView)
+
+//     Дублирование кода при создании карточки здесь и при создании cardListSection.
+// Добавьте вызов метода generateCard() в функцию createCard. Пускай она сразу возвращает результат выполнения метода — готовую карточку
+
     cardListSection.addItem(cardElement);
   }
 }, popupAddClass);
@@ -72,7 +77,7 @@ const popupPhotoView = new PicturePopup(
 );
 
 // слушатель на кнопке редактирования профиля
-editButton.addEventListener('click', () => {
+buttonEdit.addEventListener('click', () => {
   popupEditProfile.open();
   const info = userInfo.getUserInfo();
   fieldName.value = info.name
@@ -80,7 +85,8 @@ editButton.addEventListener('click', () => {
 });
 
 // слушатель на кнопке добавления новой карточки
-addButton.addEventListener('click', () => {
+buttonAdd.addEventListener('click', () => {
+  formAddCardValidator.resetPopupValidationState()
   popupAddCard.open()
 });
 

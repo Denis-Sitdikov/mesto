@@ -8,5 +8,6 @@ export default function createCard(item, popupImg){
       popupImg.open(name, link)
     }
   }, elementTemplateClass);
-  return card;
+  
+  return card.generateCard();
 }
