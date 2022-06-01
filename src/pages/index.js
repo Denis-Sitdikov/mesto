@@ -14,9 +14,9 @@ import {
   userInfoSelectors,
   formAddCard,
   formEditProfile,
-  popupImgClass,
-  popupImgCaptionClass,
-  popupImgViewClass,
+  popupImageClass,
+  popupImageCaptionClass,
+  popupImageViewClass,
   elementsContainerClass,
   popupEditClass,
   popupAddClass,
@@ -24,7 +24,7 @@ import {
 
 import createCard from "../utils/utils.js";
 
-// import './index.css';
+import './index.css';
 
 // создание экземпляра класса информации о пользователе
 const userInfo = new UserInfo(userInfoSelectors);
@@ -44,6 +44,7 @@ const formEditProfileValidator = new FormValidator(formEditProfile, currentParam
 formEditProfileValidator.enableValidation()
 
 const formAddCardValidator = new FormValidator(formAddCard, currentParams);
+
 formAddCardValidator.enableValidation()
 
 // создание попапа редактирования профиля
@@ -61,23 +62,20 @@ const popupAddCard = new PopupWithForm({
   currentParams,
   handleFormSubmit: (formData) => {
     const cardElement = createCard(formData, popupPhotoView)
-
-//     Дублирование кода при создании карточки здесь и при создании cardListSection.
-// Добавьте вызов метода generateCard() в функцию createCard. Пускай она сразу возвращает результат выполнения метода — готовую карточку
-
     cardListSection.addItem(cardElement);
   }
 }, popupAddClass);
 
 // создание попапа просмотра фото
 const popupPhotoView = new PicturePopup(
-  popupImgViewClass,
-  popupImgClass,
-  popupImgCaptionClass
+  popupImageViewClass,
+  popupImageClass,
+  popupImageCaptionClass
 );
 
 // слушатель на кнопке редактирования профиля
 buttonEdit.addEventListener('click', () => {
+  formEditProfileValidator.resetPopupValidationState()
   popupEditProfile.open();
   const info = userInfo.getUserInfo();
   fieldName.value = info.name

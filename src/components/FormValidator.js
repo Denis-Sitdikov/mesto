@@ -33,7 +33,6 @@ export default class FormValidator {
 
 // функция добавления слушателей и вызова функции проверки полей
   _setEventListeners() {
-    // const buttonElement = this._formElement.querySelector(this._validParams.submitButtonSelector);
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
@@ -58,7 +57,7 @@ export default class FormValidator {
     }
   };
 
-  // функция валидации открываемого попапа
+  // функция очистки валидации
   resetPopupValidationState() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);

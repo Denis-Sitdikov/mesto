@@ -64,6 +64,6 @@ export const currentParams = {
   export const popupAddClass = '#addCardForm'
 
   // просмотр картинки
-  export const popupImgViewClass = '#imgView'
-  export const popupImgClass = '.popup__img'
-  export const popupImgCaptionClass = '.popup__img-caption'
+  export const popupImageViewClass = '#imgView'
+  export const popupImageClass = '.popup__img'
+  export const popupImageCaptionClass = '.popup__img-caption'

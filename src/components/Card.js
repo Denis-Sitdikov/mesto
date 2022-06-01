@@ -13,7 +13,7 @@ export default class Card {
       .cloneNode(true);
     return cardElement;
   }
-  _openImgPopup(){
+  _openImageViewPopup(){
     this._cardClick(this._name, this._link)
   }
   _deleteCard() {
@@ -24,7 +24,7 @@ export default class Card {
   }
   _setEventListeners() {
     this._photo.addEventListener('click', () => {
-      this._openImgPopup();
+      this._openImageViewPopup();
     });
     this._deleteButton.addEventListener('click', () => {
       this._deleteCard();

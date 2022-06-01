@@ -6,18 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
 </head>
 
 <body class="body">
     <div class="page">
         <header class="header">
-            <img class="header__logo" src='./images/logo.svg' alt="Логотип Место" />
+            <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип Место" />
         </header>
         <main class="main">
             <section class="profile">
                 <div class="profile__block">
-                    <img class="profile__avatar" src='./images/Kusto.png' alt="Жак-Ив Кусто" />
+                    <img class="profile__avatar" src="<%=require('./images/Kusto.png')%>" alt="Жак-Ив Кусто" />
                     <div class="profile__info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button class="profile__button-edit" type="button" title="Редактировать профиль"></button>
@@ -72,7 +71,7 @@
         <div class="popup" id="imgView">
             <figure class="popup__img-container">
             <button class="popup__button-close" type="button"></button>
-                <img class="popup__img" src="./images/Dombay.png" alt="Описание изображения">
+                <img class="popup__img" src="<%=require('./images/Dombay.png')%>" alt="Описание изображения">
                 <figcaption class="popup__img-caption"></figcaption>
             </figure>
         </div>
@@ -80,14 +79,13 @@
         <template id="element-template" class="card-template_type_default">
             <article class="element">
                 <button class="element__button-delete" type="button"></button>
-                <img class="element__photo" src="./images/Dombay.png" alt="Описание изображения">
+                <img class="element__photo" src="<%=require('./images/Dombay.png')%>" alt="Описание изображения">
                 <div class="element__text">
                     <h2 class="element__title"></h2>
                     <button class="element__button-like" type="button"></button>
                 </div>
             </article>
         </template>
-        <script type ="module" src="./pages/index.js"></script>
     
 </body>
 
