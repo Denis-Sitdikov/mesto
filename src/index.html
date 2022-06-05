@@ -16,7 +16,11 @@
         <main class="main">
             <section class="profile">
                 <div class="profile__block">
-                    <img class="profile__avatar" src="<%=require('./images/Kusto.png')%>" alt="Жак-Ив Кусто" />
+                    <div class="profile__photo-block" title="Изменить аватар">
+                        <img class="profile__avatar" src="<%=require('./images/Kusto.png')%>" alt="Жак-Ив Кусто" />
+                        <div class="profile__photo-overlay"></div>
+                    </div>
+
                     <div class="profile__info">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
                         <button class="profile__button-edit" type="button" title="Редактировать профиль"></button>
@@ -34,17 +38,30 @@
             <p class="footer__text">&copy; 2022 Mesto Russia</p>
         </footer>
 
+        <div class= "popup" id="profileImageForm">
+            <div class="popup__container">
+                <button class="popup__button-close" type="button"></button>
+              <h2 class="popup__title">Обновить аватар</h2>
+              <form class="popup__form" name="editProfileImageForm" novalidate>
 
-        <div class="popup" id="profilePopup">
+                  <input id="profile-image-url-input" required class="popup__input" type="url" name="photo" placeholder="Ссылка на аватар">
+                  <span class="profile-image-url-input-error popup__input-error"></span>
+                <button class="popup__button-save" type="submit">Сохранить</button>
+              </form>
+            </div>
+          </div>
+
+
+        <div class="popup" id="profileForm">
             <div class="popup__container">
                 <button class="popup__button-close" type="button"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form" name="popup-form" novalidate>
-                    <input class="popup__input" type="text" required placeholder="Ваше имя" name="name"
-                        id="profileName" minlength="2" maxlength="40">
+                    <input id="profileName" class="popup__input" type="text" required placeholder="Ваше имя" name="name"
+                         minlength="2" maxlength="40">
                         <span class="profileName-error popup__input-error">Текст должен быть не короче 2&nbsp;симв. Длина текста сейчас: 1&nbsp;символ.</span>
-                    <input class="popup__input" type="text" required placeholder="О себе" name="description"
-                        id="profileDescription" minlength="2" maxlength="200">
+                    <input id="profileDescription" class="popup__input" type="text" required placeholder="О себе" name="description"
+                         minlength="2" maxlength="200">
                         <span class="profileDescription-error popup__input-error">Текст должен быть не короче 2&nbsp;симв. Длина текста сейчас: 1&nbsp;символ.</span>
                     <button class="popup__button-save" type="submit" disabled="disabled">Сохранить</button>
                 </form>
@@ -63,18 +80,29 @@
                     <input class="popup__input" type="url" required placeholder="Ссылка на картинку" name="link"
                         id="placeLink" />
                         <span class="placeLink-error popup__input-error">Введите адрес сайта</span>
-                    <button class="popup__button-save popup__button-save_inactive" type="submit">Сохранить</button>
+                    <button class="popup__button-save" type="submit">Сохранить</button>
                 </form>
             </div>
         </div>
 
-        <div class="popup" id="imgView">
+        <div class="popup" id="viewPhoto">
             <figure class="popup__img-container">
             <button class="popup__button-close" type="button"></button>
                 <img class="popup__img" src="<%=require('./images/Dombay.png')%>" alt="Описание изображения">
                 <figcaption class="popup__img-caption"></figcaption>
             </figure>
         </div>
+
+        <div class= "popup" id="deleteImagePopup"> 
+            <div class="popup__container">
+                <button class="popup__button-close" type="button"></button>
+              <h2 class="popup__title">Вы уверены?</h2>
+              <form class="popup__form" name="popupAddCardForm" novalidate>
+                <button id="confirmationButton" class="popup__button-save" type="submit">Да</button>
+              </form>
+            </div>
+        </div>
+
     </div>
         <template id="element-template" class="card-template_type_default">
             <article class="element">
@@ -82,7 +110,10 @@
                 <img class="element__photo" src="<%=require('./images/Dombay.png')%>" alt="Описание изображения">
                 <div class="element__text">
                     <h2 class="element__title"></h2>
-                    <button class="element__button-like" type="button"></button>
+                    <div class="element__like-section">
+                        <button class="element__button-like" type="button"></button>
+                        <span class="element__like-count">0</span>
+                      </div>
                 </div>
             </article>
         </template>

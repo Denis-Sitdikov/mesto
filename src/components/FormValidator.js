@@ -1,63 +1,63 @@
 export default class FormValidator {
-  constructor(formElement, validParams) {
-    this._validParams = validParams;
+  constructor(formElement, validationParams) {
+    this._validationParams = validationParams;
     this._formElement = formElement;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._validParams.inputSelector));
-    this._submitButton = this._formElement.querySelector(this._validParams.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationParams.inputSelector));
+    this._submitButton = this._formElement.querySelector(this._validationParams.submitButtonSelector);
   }
 
-// функция проверки валидации и вызова отображения/скрытия ошибки
+// метод проверки валидации и вызова отображения/скрытия ошибки
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement);
     }
-  };
+  }
 
-// функция отображения ошибки валидации
+// метод отображения ошибки валидации
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add(this._validParams.inputErrorClass);
+    inputElement.classList.add(this._validationParams.inputErrorClass);
     errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._validParams.errorClass);
-  };
+    errorElement.classList.add(this._validationParams.errorClass);
+  }
 
-// функция скрытия ошибки валидации
+// метод скрытия ошибки валидации
   _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(this._validParams.inputErrorClass);
-    errorElement.classList.remove(this._validParams.errorClass);
+    inputElement.classList.remove(this._validationParams.inputErrorClass);
+    errorElement.classList.remove(this._validationParams.errorClass);
     errorElement.textContent = '';
-  };
+  }
 
-// функция добавления слушателей и вызова функции проверки полей
+// метод добавления слушателей и вызова функции проверки полей
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
-        this._toggleButtonState(this._inputList, this._submitButton, this._validParams.inactiveButtonClass);
+        this._toggleButtonState(this._inputList, this._submitButton, this._validationParams.inactiveButtonClass);
       });
     });
-  };
+  }
 
 // проверка валидности массива полей
   _hasInvalidInput() {
     return this._inputList.some(input => !input.validity.valid)
-  };
+  }
 
-// функция изменения состояни активности кнопки сохранения формы
+// метод изменения состояни активности кнопки сохранения формы
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._submitButton.classList.add(this._validParams.inactiveButtonClass);
+      this._submitButton.classList.add(this._validationParams.inactiveButtonClass);
       this._submitButton.setAttribute('disabled', true);
     } else {
-      this._submitButton.classList.remove(this._validParams.inactiveButtonClass);
+      this._submitButton.classList.remove(this._validationParams.inactiveButtonClass);
       this._submitButton.removeAttribute('disabled');
     }
-  };
+  }
 
-  // функция очистки валидации
+  // метод валидации открываемого попапа
   resetPopupValidationState() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
@@ -65,8 +65,8 @@ export default class FormValidator {
     this._toggleButtonState(this._inputList,this._submitButton);
   }
 
-// функция включения валидации
+// метод включения валидации
   enableValidation() {
     this._setEventListeners();
-  };
+  }
 }
