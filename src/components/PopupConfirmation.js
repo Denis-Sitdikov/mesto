@@ -23,7 +23,4 @@ export default class PopupWithConfirmation extends Popup {
     super.open();
   }
 
-  close() {
-    super.close();
-  }
 }
