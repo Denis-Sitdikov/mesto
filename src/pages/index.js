@@ -107,14 +107,14 @@ const popupEditProfilePhoto = new PopupWithForm({
     popupEditProfilePhoto.submitButton.textContent = "Сохранение..."
     api.patchUserPhoto(formData.photo)
       .then((result) => {
-        profilePhoto.src = result.avatar;
+        userInfo.setPhoto(result.avatar);
         popupEditProfilePhoto.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
-        popupEditProfile.submitButton.textContent = buttonText;
+        popupEditProfilePhoto.submitButton.textContent = buttonText;
       });
   }
 }, popupPhotoProfileSelector);

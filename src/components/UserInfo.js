@@ -15,8 +15,12 @@ export default class UserInfo {
   setUserInfo(name, description, photo, id) {
     this._currentName.textContent = name;
     this._currentDescription.textContent = description;
-    this._avatar.src = photo;
     this._id = id;
+    this.setPhoto(photo);
+  }
+
+  setPhoto(photo) {
+    this._avatar.src = photo;
   }
 
   getID() {

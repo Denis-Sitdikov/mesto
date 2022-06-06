@@ -8,10 +8,11 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popup.querySelector('.popup__form');
     this.submitButton  = this._form.querySelector('.popup__button-save');
+    this._inputList = this._form.querySelectorAll(this._currentParams.inputSelector)
   }
 
   _getInputValues() {
-    const inputList = Array.from(this._form.querySelectorAll(this._currentParams.inputSelector));
+    const inputList = Array.from(this._inputList);
     this._element = {};
     inputList.forEach((input) => {
       this._element[input.name] = input.value;
